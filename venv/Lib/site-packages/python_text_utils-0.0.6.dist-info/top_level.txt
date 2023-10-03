@@ -1,0 +1,2 @@
+python_text_utils
+python_text_utils/tests

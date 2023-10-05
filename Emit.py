@@ -43,46 +43,57 @@ def speak( text ):
 def greet_user():
     hour = datetime.now().hour
 
-    if( hour >= 6 ) and ( hour < 12 ):
-        speak( f"Good Morning {USERNAME}" )
-    elif( hour >= 12 ) and ( hour < 16 ):
-        speak( f"Good Afternoon {USERNAME}" )
-    elif( hour >= 16 ) and ( hour < 23 ):
-        speak( f"Good Evening {USERNAME}" )
-    
-    speak( f"I am {BOTNAME} . How may I assist you ?")
+    if 6 <= hour < 12:
+        greeting = "Good morning Sir"
+    elif 12 <= hour < 16:
+        greeting = "Good afternoon Sir"
+    elif 16 <= hour < 23:
+        greeting = "Good evening Sir"
+    else:
+        greeting = "Hello Sir"
+
+    messages = [
+        f"{greeting}, {USERNAME}!",
+        f"I'm {BOTNAME}. How can I assist you today?",
+        "aaaahhhhhh fuckkkkk",
+    ]
+
+    for message in messages:
+        speak(message)
 
 def take_user_input():
-
-    r = sr.Recognizer()
+    recognizer = sr.Recognizer()
 
     with sr.Microphone() as source:
-        print('Listening.....')
-        r.pause_threshold = 1 
-        audio = r.listen(source) 
+        print('Listening...')
+        recognizer.pause_threshold = 1
+        audio = recognizer.listen(source)
 
     try:
-        print('Recognizing.....')
-        query = r.recognize_google( audio, language='en-in')
+        print('Recognizing...')
+        query = recognizer.recognize_google(audio, language='en-in').lower()
 
-        """ If the query doesn't have those two words (exit or stop), we speak something to tell the user that we have heard them """
-        if not 'exit' in query or 'stop' in query:
-            speak( choice(opening_text))
-
-        else:
+        if 'exit' in query or 'stop' in query:
             hour = datetime.now().hour
-            if( hour >= 24 ) and ( hour < 6 ):
-                speak("I think you should sleep Sir, Please take Take care of Yourself!")
+            if 6 <= hour < 12:
+                speak("Goodbye for now! Have a productive morning.")
+            elif 12 <= hour < 16:
+                speak("Goodbye for now! Enjoy your afternoon.")
+            elif 16 <= hour < 23:
+                speak("Goodbye for now! Have a pleasant evening.")
             else:
-                speak('Have a Good day sir!')
+                speak("Goodbye for now! Take care.")
+
             exit()
 
+        return query
 
-    except Exception:
-        speak('Sorry, I could not understand. Could you please say that again?')
-        query = 'None'
-    return query
+    except sr.UnknownValueError:
+        speak('Sorry, I could not understand what you said. Could you please repeat that?')
+    except sr.RequestError:
+        speak('I encountered an error while processing your request. Please try again later.')
 
+    return 'None'
 
 from functions.online_ops import find_my_ip, get_latest_news, get_random_advice, get_random_joke, get_trending_movies, get_weather_report, play_on_youtube, search_on_google, search_on_wikipedia, send_email, send_whatsapp_message
 from functions.os_ops import open_camera, open_cmd, open_notepad

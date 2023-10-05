@@ -33,27 +33,21 @@ engine.setProperty('volume', 1.0)
 voices = engine.getProperty('voices')
 """ to some more voices 1st download the voice from Google or any other platform and upload it in registry editor in your systerm"""
 # print(voices[1].id)
-engine.setProperty('voice',  voices[1].id)
+engine.setProperty('voice',  voices[0].id)
 
 # #************ TEXT TO SPEECH ***************
 
 def speak( text ):
-    """used to speak whatever text is passed to it"""
-
     engine.say(text)
     engine.runAndWait()
 
 def greet_user():
-    """Greets the user according to the time"""
-
     hour = datetime.now().hour
 
     if( hour >= 6 ) and ( hour < 12 ):
         speak( f"Good Morning {USERNAME}" )
-    
     elif( hour >= 12 ) and ( hour < 16 ):
         speak( f"Good Afternoon {USERNAME}" )
-
     elif( hour >= 16 ) and ( hour < 23 ):
         speak( f"Good Evening {USERNAME}" )
     
@@ -61,16 +55,8 @@ def greet_user():
 
 def take_user_input():
 
-    """Takes user input, recognizes it using SpeechRecognition module and converts it into text"""
-    """ Here the Recognizer class within the SpeechRecognition module will help us recognize the audio """
-    """ Microphone module will provide us access to microphone """
-    """ microphone as a source we try to listen to the audio using listen() method in recognizer """
-    """ pause threshold is used if take a pause for a sec while speaking"""
-    """ The recognize_google() method performs speech recognition on the audio passed to it, using the Google Speech Recognition API. """
-    """ en-in is english india language"""
-
-
     r = sr.Recognizer()
+
     with sr.Microphone() as source:
         print('Listening.....')
         r.pause_threshold = 1 
@@ -83,12 +69,11 @@ def take_user_input():
         """ If the query doesn't have those two words (exit or stop), we speak something to tell the user that we have heard them """
         if not 'exit' in query or 'stop' in query:
             speak( choice(opening_text))
-        
 
         else:
             hour = datetime.now().hour
-            if( hour >= 21 ) and ( hour < 6 ):
-                speak("Good night Sir, Take care!")
+            if( hour >= 24 ) and ( hour < 6 ):
+                speak("I think you should sleep Sir, Please take Take care of Yourself!")
             else:
                 speak('Have a Good day sir!')
             exit()
@@ -105,7 +90,6 @@ from functions.os_ops import open_camera, open_cmd, open_notepad
 from pprint import pprint
 
 if __name__ == '__main__':
-
     greet_user()
 
     while True:
@@ -113,7 +97,6 @@ if __name__ == '__main__':
 
         if 'open notepad' in query:
             open_notepad()
-
 
         elif 'open command prompt' in query or 'open cmd' in query:
             open_cmd()

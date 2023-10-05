@@ -32,7 +32,6 @@ engine.setProperty('volume', 1.0)
 #set Vocie
 voices = engine.getProperty('voices')
 """ to some more voices 1st download the voice from Google or any other platform and upload it in registry editor in your systerm"""
-# print(voices[1].id)
 engine.setProperty('voice',  voices[0].id)
 
 # #************ TEXT TO SPEECH ***************

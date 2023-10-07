@@ -95,7 +95,7 @@ def take_user_input():
     return 'None'
 
 from functions.online_ops import find_my_ip, get_latest_news, get_random_advice, get_random_joke, get_trending_movies, get_weather_report, play_on_youtube, search_on_google, search_on_wikipedia, send_email, send_whatsapp_message
-from functions.os_ops import open_camera, open_cmd, open_notepad, open_calculator, open_task_manager, open_vscode
+from functions.os_ops import open_camera, open_cmd, open_notepad, open_calculator, open_task_manager, open_vscode, open_file_explorer, open_control_panel
 from pprint import pprint
 
 general_responses = {
@@ -160,8 +160,11 @@ if __name__ == '__main__':
         elif 'open calculator' in query:
             open_calculator()
 
-        elif 'open vs code' in query:
-            open_vscode()
+        elif 'open google chrome' in query:
+            open_file_explorer()
+
+        elif 'open control panel' in query:
+            open_control_panel()
 
         elif 'ip address' in query:
             ip_address = find_my_ip()

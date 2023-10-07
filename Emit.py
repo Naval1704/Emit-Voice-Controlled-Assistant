@@ -5,7 +5,6 @@ from decouple import config
 from requests import get
 import speech_recognition as sr
 from random import choice
-
 from utils import opening_text
 import subprocess as sp
 from geopy.geocoders import Nominatim
@@ -96,7 +95,7 @@ def take_user_input():
     return 'None'
 
 from functions.online_ops import find_my_ip, get_latest_news, get_random_advice, get_random_joke, get_trending_movies, get_weather_report, play_on_youtube, search_on_google, search_on_wikipedia, send_email, send_whatsapp_message
-from functions.os_ops import open_camera, open_cmd, open_notepad
+from functions.os_ops import open_camera, open_cmd, open_notepad, open_calculator, open_task_manager, open_vscode
 from pprint import pprint
 
 general_responses = {
@@ -106,10 +105,10 @@ general_responses = {
     'what can you do': 'I can open applications, provide weather updates, search the web, and more. Just ask!',
     'what\'s your favorite color': 'I don\'t have a favorite color, but I\'m here to help you with your tasks!',
     'where are you from': 'I exist in the digital world, ready to assist you wherever you are.',
-    'when were you created': 'I was created by [Your Name] and [Your Date of Creation].',
+    'when were you created': 'I was created by Gaurav Naval on 15th December 2022.',
     'can you sing': 'I\'m not equipped to sing, but I can provide information, answer questions, and perform tasks for you.',
     'do you have a family': 'I don\'t have a family, but I\'m here to assist you 24/7.',
-    'who is your creator': 'I was created by [Your Name] to assist you with various tasks.',
+    'who is your creator': 'I was created by Gaurav Naval to assist you with various tasks.',
     'what\'s the meaning of life': 'The meaning of life is a philosophical question. I\'m here to assist you with practical tasks!',
     'what\'s your favorite food': 'I don\'t eat, so I don\'t have a favorite food. How can I assist you today?',
     'tell me a fun fact': 'Sure! Did you know that honey never spoils? Archaeologists have found pots of honey in ancient Egyptian tombs that are over 3,000 years old and still perfectly edible!',
@@ -145,7 +144,6 @@ if __name__ == '__main__':
        
         if query in general_responses:
             speak(general_responses[query])
-            continue  # Skip further processing for general queries
 
         elif 'open notepad' in query:
             open_notepad()
@@ -155,6 +153,15 @@ if __name__ == '__main__':
 
         elif 'open camera' in query:
             open_camera()
+
+        elif 'open task manager' in query:
+            open_task_manager()
+
+        elif 'open calculator' in query:
+            open_calculator()
+
+        elif 'open vs code' in query:
+            open_vscode()
 
         elif 'ip address' in query:
             ip_address = find_my_ip()

@@ -25,7 +25,7 @@ def open_file_explorer():
     os.startfile( paths['Chrome'] )
 
 def open_calculator():
-    sp.run('start microsoft.windows.calculator:', shell=True)
+    sp.run('start microsoft.windows.Calculator:', shell=True)
 
 def open_task_manager():
     os.startfile( paths['taskManager'] )
